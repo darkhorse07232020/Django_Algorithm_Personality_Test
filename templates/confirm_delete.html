@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+ <h1>Are you sure about to delete this {{user.name}} ?</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button type="sumbit" class="btn btn-danger">Delete</button>
+  </form>
+  <a href="{% url 'index' %}">Home</a>
+{% endblock %}
