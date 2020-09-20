@@ -1,43 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="center">
-    <h1>List all users</h1>
+    <h1>Answer The Question</h1>
     <hr>
+    {{quiz.page_range}}
     <table class="table">
        <thead class="thead-dark">
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Actions</th>
-            <th scope="col">Icon</th>
+            <th scope="col">Question</th>
+            <th scope="col">Degree</th>
         </tr>
         <tbody>
-            {% for usr in users %}
+            {% for qz in quiz %}
             <tr>
-                <th>{{ usr.name }}</th>
-                <th>{{ usr.email }}</th>
-                <th scope="col">
-                    <a href="{% url 'update' usr.id %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update</a>
-                    <a href="{% url 'delete' usr.id %}" class="btn btn-danger btn-lg active"  role="button" aria-pressed="true">Delete</a>
+                <th>To what extent do I like to {{ qz.quiz}}</th>
+                <th>
+                    <input type="range" id="customRange" name="points1" min="0" max="5" setp="1" value="0" onchange="setVal">
+                    <sapn id = "dereeVal" />
                 </th>
-                <th scope="col">Image</th>
-            {% endfor %}
             </tr>
+            {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'create' %}">Create new user</a>
+    <hr>
+    <button type="button" class="btn btn-outline-primary" style="margin-right: 30px">Prev</button>
+    <button type="button" class="btn btn-outline-primary" style="margin-left: 30px">Next</button>
+    <!-- <a href="{% url 'create' %}">Create new user</a> -->
 </div>
-<div class="row">
-  <div class="col-12">
-    <form class="form-inline">
-        <div class="form-group mb-2">
-            <label for="searchUser" class="sr-only">Search user:  </label>
-            <input type="text" name="searchuser" id="searchUser" class="form-control-plaintext" placeholder="Search user by name: ">
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-           <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </form>
-  </div>
-</div>
+
 {% endblock %}

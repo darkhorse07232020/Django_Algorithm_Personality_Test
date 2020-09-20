@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import MyUser 
+from django.core.paginator import Paginator
+from .models import QuizSource
 from .forms import CreateUserForm
 
 # Create your views here.
@@ -11,17 +12,18 @@ def create(request):
     return render(request, "form.html", {"form": form})
 
 def read(request):
-    search_user = request.GET.get('searchuser' or None)
+    search_quiz = request.GET.get(None)
 
-    if search_user:
-        users = MyUser.objects.all()
-        users = users.filter(name=search_user)
+    if search_quiz:
+        quiz = QuizSource.objects.all()
+        # quiz = users.filter(name=search_quiz)
     else:
-        users = MyUser.objects.all()
-    return render(request, "index.html", {'users': users})
+        quiz = QuizSource.objects.all()
+    quiz = Paginator(quiz, 12);
+    return render(request, "index.html", {'quiz': quiz.page(1)})
 
 def update(request, id):
-    user = get_object_or_404(MyUser, pk=id)
+    user = get_object_or_404(QuizSource, pk=id)
     form = CreateUserForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form.save()
@@ -30,7 +32,7 @@ def update(request, id):
 
 
 def delete(request, id):
-    user = get_object_or_404(MyUser, pk=id)
+    user = get_object_or_404(QuizSource, pk=id)
     form = CreateUserForm(request.POST or None, request.FILES or None, instance=user)
     if request.method == "POST":
         user.delete()

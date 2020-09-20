@@ -1,3 +1,11 @@
 .center {
     text-align: center;
 }
+
+.main-footer {
+    margin-top: 10px;
+    text-align: center !important;
+    padding: 3px !important;
+    background-color: #bfbfbf !important;
+    color: white !important;
+}
