@@ -19,8 +19,10 @@ def read(request):
         # quiz = users.filter(name=search_quiz)
     else:
         quiz = QuizSource.objects.all()
-    quiz = Paginator(quiz, 12);
-    return render(request, "index.html", {'quiz': quiz.page(1)})
+    quiz = Paginator(quiz, 12)
+    page_number = request.GET.get('page')
+    page_obj = quiz.get_page(page_number)
+    return render(request, "index.html", {'quiz': page_obj})
 
 def update(request, id):
     user = get_object_or_404(QuizSource, pk=id)
