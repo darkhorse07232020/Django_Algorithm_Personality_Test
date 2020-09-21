@@ -14,8 +14,8 @@
             <tr>
                 <th>To what extent do I like to {{ qz.quiz}}</th>
                 <th>
-                    <input type="range" id="ext{{qz.id}}" name="points1" min="0" max="5" setp="1" value="0" onchange="setVal">
-                    <sapn id = "dereeVal" />
+                    <input type="range" id="{{qz.id}}" name="points1" min="0" max="5" setp="1" value="0" onchange="setVal()">
+                    <sapn id = "val{{qz.id}}" />
                     <!-- <input id={{qz.quiz}} type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
                     <span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span> -->
                 </th>
@@ -58,11 +58,4 @@
     <button type="button" class="btn btn-outline-primary" style="margin-left: 30px">Next</button> -->
     <!-- <a href="{% url 'create' %}">Create new user</a> -->
 </div>
-<script type="text/javascript">
-    // With JQuery
-    $("#ex6").slider();
-    $("#ex6").on("slide", function(slideEvt) {
-    	$("#ex6SliderVal").text(slideEvt.value);
-    });
-</script>
 {% endblock %}
